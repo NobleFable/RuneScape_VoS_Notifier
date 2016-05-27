@@ -74,7 +74,7 @@ namespace RuneScape_VoS_Notifier.Source
                                 string clanOne = parts[9];
                                 string clanTwo = parts[11];
                                 FormMain.Instance.SetVoS(clanOne, clanTwo);
-                                FormMain.Instance.ShowNotification(clanOne, clanTwo, latestVoS.Contains("Trahaearn"));
+                                FormMain.Instance.ShowNotification(clanOne, clanTwo, latestVoS.Contains("Trahaearn"), hour);
                             }
                         }
                     }

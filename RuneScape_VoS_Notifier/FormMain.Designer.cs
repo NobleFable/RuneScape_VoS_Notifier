@@ -34,13 +34,19 @@ namespace RuneScape_VoS_Notifier
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.notifyIcoVOS = new System.Windows.Forms.NotifyIcon(this.components);
             this.cntxtNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.maximizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picDisplayOne = new System.Windows.Forms.PictureBox();
             this.picDisplayTwo = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTimeUntilNextVOS = new System.Windows.Forms.Label();
-            this.maximizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.past5VoSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlStripPreviousVoSOne = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlStripPreviousVoSTwo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlStripPreviousVoSThree = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlStripPreviousVoSFour = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlStripPreviousVoSFive = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtNotifyIcon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDisplayOne)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDisplayTwo)).BeginInit();
@@ -59,10 +65,18 @@ namespace RuneScape_VoS_Notifier
             // cntxtNotifyIcon
             // 
             this.cntxtNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.past5VoSToolStripMenuItem,
             this.maximizeToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.cntxtNotifyIcon.Name = "cntxtNotifyIcon";
-            this.cntxtNotifyIcon.Size = new System.Drawing.Size(153, 70);
+            this.cntxtNotifyIcon.Size = new System.Drawing.Size(153, 92);
+            // 
+            // maximizeToolStripMenuItem
+            // 
+            this.maximizeToolStripMenuItem.Name = "maximizeToolStripMenuItem";
+            this.maximizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.maximizeToolStripMenuItem.Text = "M&aximize";
+            this.maximizeToolStripMenuItem.Click += new System.EventHandler(this.maximizeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -130,12 +144,47 @@ namespace RuneScape_VoS_Notifier
             this.lblTimeUntilNextVOS.TabIndex = 4;
             this.lblTimeUntilNextVOS.Text = "checking...";
             // 
-            // maximizeToolStripMenuItem
+            // past5VoSToolStripMenuItem
             // 
-            this.maximizeToolStripMenuItem.Name = "maximizeToolStripMenuItem";
-            this.maximizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.maximizeToolStripMenuItem.Text = "M&aximize";
-            this.maximizeToolStripMenuItem.Click += new System.EventHandler(this.maximizeToolStripMenuItem_Click);
+            this.past5VoSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tlStripPreviousVoSOne,
+            this.tlStripPreviousVoSTwo,
+            this.tlStripPreviousVoSThree,
+            this.tlStripPreviousVoSFour,
+            this.tlStripPreviousVoSFive});
+            this.past5VoSToolStripMenuItem.Name = "past5VoSToolStripMenuItem";
+            this.past5VoSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.past5VoSToolStripMenuItem.Text = "P&ast 5 VoS";
+            // 
+            // tlStripPreviousVoSOne
+            // 
+            this.tlStripPreviousVoSOne.Name = "tlStripPreviousVoSOne";
+            this.tlStripPreviousVoSOne.Size = new System.Drawing.Size(152, 22);
+            this.tlStripPreviousVoSOne.Text = "#1: --";
+            // 
+            // tlStripPreviousVoSTwo
+            // 
+            this.tlStripPreviousVoSTwo.Name = "tlStripPreviousVoSTwo";
+            this.tlStripPreviousVoSTwo.Size = new System.Drawing.Size(152, 22);
+            this.tlStripPreviousVoSTwo.Text = "#2: --";
+            // 
+            // tlStripPreviousVoSThree
+            // 
+            this.tlStripPreviousVoSThree.Name = "tlStripPreviousVoSThree";
+            this.tlStripPreviousVoSThree.Size = new System.Drawing.Size(152, 22);
+            this.tlStripPreviousVoSThree.Text = "#3: --";
+            // 
+            // tlStripPreviousVoSFour
+            // 
+            this.tlStripPreviousVoSFour.Name = "tlStripPreviousVoSFour";
+            this.tlStripPreviousVoSFour.Size = new System.Drawing.Size(152, 22);
+            this.tlStripPreviousVoSFour.Text = "#4: --";
+            // 
+            // tlStripPreviousVoSFive
+            // 
+            this.tlStripPreviousVoSFive.Name = "tlStripPreviousVoSFive";
+            this.tlStripPreviousVoSFive.Size = new System.Drawing.Size(152, 22);
+            this.tlStripPreviousVoSFive.Text = "#5: --";
             // 
             // FormMain
             // 
@@ -149,7 +198,7 @@ namespace RuneScape_VoS_Notifier
             this.Controls.Add(this.label1);
             this.Controls.Add(this.picDisplayTwo);
             this.Controls.Add(this.picDisplayOne);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.Text = "RuneScape - Voice of Seren";
@@ -174,6 +223,12 @@ namespace RuneScape_VoS_Notifier
         private System.Windows.Forms.ContextMenuStrip cntxtNotifyIcon;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem maximizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem past5VoSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tlStripPreviousVoSOne;
+        private System.Windows.Forms.ToolStripMenuItem tlStripPreviousVoSTwo;
+        private System.Windows.Forms.ToolStripMenuItem tlStripPreviousVoSThree;
+        private System.Windows.Forms.ToolStripMenuItem tlStripPreviousVoSFour;
+        private System.Windows.Forms.ToolStripMenuItem tlStripPreviousVoSFive;
     }
 }
 

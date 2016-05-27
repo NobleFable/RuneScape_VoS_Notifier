@@ -13,12 +13,20 @@ namespace RuneScape_VoS_Notifier
 {
     public partial class FormMain : Form
     {
+
+        private struct PastVoS
+        {
+            public string Display;
+        }
+
         public static FormMain Instance
         {
             get; private set;
         }
 
         static CheckerThread checker;
+
+        static List<PastVoS> pastVoS = new List<PastVoS>();
 
         public FormMain()
         {
@@ -76,8 +84,9 @@ namespace RuneScape_VoS_Notifier
             }
         }
 
-        public void ShowNotification(string clanOne, string clanTwo, bool trahHour)
+        public void ShowNotification(string clanOne, string clanTwo, bool trahHour, int hour)
         {
+            UpdatePastVoS(clanOne, clanTwo, hour);
             this.notifyIcoVOS.BalloonTipText = string.Format("The Voice of Seren is now active in the {0} and {1} districts!", clanOne, clanTwo);
             this.notifyIcoVOS.Text = new StringBuilder().Append("Voice of Seren - ").Append(clanOne).Append(" and ").Append(clanTwo).ToString();
             if (trahHour)
@@ -107,6 +116,28 @@ namespace RuneScape_VoS_Notifier
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
+        }
+
+        private void UpdatePastVoS(string clanOne, string clanTwo, int hour)
+        {
+            // add the newest to the list
+            PastVoS past = new PastVoS();
+            past.Display = string.Format("{0}:00 - {1} and {2}", hour.ToString("00"), clanOne, clanTwo);
+            pastVoS.Add(past);
+            if (pastVoS.Count() > 6)
+            {
+                pastVoS.RemoveAt(0);
+            }
+            if (pastVoS.Count() > 1)
+                this.tlStripPreviousVoSOne.Text = "#1: " + pastVoS.ElementAt(0).Display;
+            if (pastVoS.Count() > 2)
+                this.tlStripPreviousVoSTwo.Text = "#2: " + pastVoS.ElementAt(1).Display;
+            if (pastVoS.Count() > 3)
+                this.tlStripPreviousVoSThree.Text = "#3: " + pastVoS.ElementAt(2).Display;
+            if (pastVoS.Count() > 4)
+                this.tlStripPreviousVoSFour.Text = "#4: " + pastVoS.ElementAt(3).Display;
+            if (pastVoS.Count() > 5)
+                this.tlStripPreviousVoSFive.Text = "#5: " + pastVoS.ElementAt(4).Display;
         }
     }
 }
